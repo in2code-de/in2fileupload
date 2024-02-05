@@ -2,6 +2,11 @@
 
 Is a TYPO3 extension that makes it possible to force the user to set metadata such as copyright when uploading.
 
+## Requirements
+
+* TYPO3 11.x
+* PHP 8.0
+
 ## TypoScript configuration
 
 ### Allowed file types (`settings.allowedFileTypes`)
