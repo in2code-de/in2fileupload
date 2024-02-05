@@ -1,0 +1,17 @@
+<f:flashMessages/>
+
+<div class="module">
+	<div class="module-body">
+		<f:if condition="{folder}">
+			<f:then>
+				<f:render section="content"/>
+			</f:then>
+			<f:else>
+				<h1>
+					<f:translate key="LLL:EXT:in2fileupload/Resources/Private/Language/Backend/locallang.xlf:selectFolder"/>
+					<f:translate key="please_choose_folder"></f:translate>
+				</h1>
+			</f:else>
+		</f:if>
+	</div>
+</div>

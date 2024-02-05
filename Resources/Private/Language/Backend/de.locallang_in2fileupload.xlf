@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages">
+		<header/>
+		<body>
+			<trans-unit id="mlang_tabs_tab">
+				<source>File Upload</source>
+				<target>Dateiupload</target>
+			</trans-unit>
+			<trans-unit id="mlang_labels_tabdescr">
+				<source>Fileupload to FAL</source>
+				<target>Dateiupload ins FAL</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

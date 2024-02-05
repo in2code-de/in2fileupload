@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2024-01-25T00:00:00Z" product-name="in2template">
+		<header />
+		<body>
+			<trans-unit id="title">
+				<target>Titel</target>
+			</trans-unit>
+			<trans-unit id="description">
+				<target>Beschreibung</target>
+			</trans-unit>
+			<trans-unit id="description.placeholder">
+				<target>meine Beschreibung</target>
+			</trans-unit>
+			<trans-unit id="copyright">
+				<target>Copyright</target>
+			</trans-unit>
+			<trans-unit id="uploadError.missingConfiguration.title">
+				<target>fehlende Extension Konfiguration</target>
+			</trans-unit>
+			<trans-unit id="uploadError.missingConfiguration.message">
+				<target>Upload nicht möglich wegen fehlender Extension Konfiguration</target>
+			</trans-unit>
+			<trans-unit id="uploadError.missingFile.title">
+				<target>keine Datei zum Upload gefunden</target>
+			</trans-unit>
+			<trans-unit id="uploadError.missingFile.message">
+				<target>Es wurde keine Datei für den Upload gefunden</target>
+			</trans-unit>
+			<trans-unit id="uploadError.batchUpload.title">
+				<target>Batch Upload nicht unterstützt</target>
+			</trans-unit>
+			<trans-unit id="uploadError.batchUpload.message">
+				<target>Es sieht so aus als wurde der Batch Upload für Uppy aktiviert. Dieser wird von dieser Extension nicht unterstützt.</target>
+			</trans-unit>
+			<trans-unit id="uploadError.missingFolder.title">
+				<target>Fehlender Zielordner</target>
+			</trans-unit>
+			<trans-unit id="uploadError.missingFolder.message">
+				<target>Es wurde kein Zielordner für den Upload gefunden.</target>
+			</trans-unit>
+			<trans-unit id="maxFilesize">
+				<target>Maximale Dateigröße</target>
+			</trans-unit>
+			<trans-unit id="allowedFiletypes">
+				<target>Erlaubte Dateitypen</target>
+			</trans-unit>
+			<trans-unit id="fileuploadFolder">
+				<target>Dateiupload im Ordner</target>
+			</trans-unit>
+			<trans-unit id="uploadError.targetFileExist.title">
+				<target>Datei existiert bereits</target>
+			</trans-unit>
+			<trans-unit id="uploadError.targetFileExist.message">
+				<target>Es existiert bereits eine Datei mit diesem Namen im gewählten Ordner.</target>
+			</trans-unit>
+			<trans-unit id="selectFolder">
+				<target>Bitte einen Ordner auswählen</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

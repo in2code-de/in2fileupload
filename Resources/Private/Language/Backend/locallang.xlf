@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2024-01-25T00:00:00Z" product-name="in2fileupload">
+		<header />
+		<body>
+			<trans-unit id="title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="description.placeholder">
+				<source>my description</source>
+			</trans-unit>
+			<trans-unit id="copyright">
+				<source>Copyright</source>
+			</trans-unit>
+			<trans-unit id="uploadError.missingConfiguration.title">
+				<source>missing extension configuration</source>
+			</trans-unit>
+			<trans-unit id="uploadError.missingConfiguration.message">
+				<source>Upload not possible due to missing extension configuration</source>
+			</trans-unit>
+			<trans-unit id="uploadError.missingFile.title">
+				<source>No file</source>
+			</trans-unit>
+			<trans-unit id="uploadError.missingFile.message">
+				<source>No file was found to upload</source>
+			</trans-unit>
+			<trans-unit id="uploadError.batchUpload.title">
+				<source>Batch upload not supported</source>
+			</trans-unit>
+			<trans-unit id="uploadError.batchUpload.message">
+				<source>It looks like batch upload has been enabled for Uppy. This is not supported by this extension.</source>
+			</trans-unit>
+			<trans-unit id="uploadError.missingFolder.title">
+				<source>Missing destination folder</source>
+			</trans-unit>
+			<trans-unit id="uploadError.missingFolder.message">
+				<source>No upload destination folder was found.</source>
+			</trans-unit>
+			<trans-unit id="maxFilesize">
+				<source>Max Filesize</source>
+			</trans-unit>
+			<trans-unit id="allowedFiletypes">
+				<source>Allowed Filetypes</source>
+			</trans-unit>
+			<trans-unit id="fileuploadFolder">
+				<source>File upload in the folder</source>
+			</trans-unit>
+			<trans-unit id="uploadError.targetFileExist.title">
+				<source>File already exists</source>
+			</trans-unit>
+			<trans-unit id="uploadError.targetFileExist.message">
+				<source>A file with this name already exists in this folder.</source>
+			</trans-unit>
+			<trans-unit id="selectFolder">
+				<source>Please select a folder</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

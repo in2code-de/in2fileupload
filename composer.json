@@ -1,0 +1,35 @@
+{
+  "name": "in2code/in2fileupload",
+  "type": "typo3-cms-extension",
+  "description": "Is a TYPO3 extension that makes it possible to force the user to set metadata such as copyright when uploading.",
+  "keywords": [
+    "TYPO3",
+    "extension"
+  ],
+  "homepage": "https://www.in2code.de",
+  "authors": [
+    {
+      "name": "Sebastian Stein",
+      "email": "sebastian.stein@in2code.de"
+    }
+  ],
+  "license": "GPL-2.0+",
+  "require": {
+    "php": "^8.0",
+    "typo3/cms-core": "^11"
+  }
+  ,
+  "require-dev": {
+    "roave/security-advisories": "dev-latest"
+  },
+  "autoload": {
+    "psr-4": {
+      "In2code\\In2fileupload\\": "Classes"
+    }
+  },
+  "extra": {
+    "typo3/cms": {
+      "extension-key": "in2fileupload"
+    }
+  }
+}

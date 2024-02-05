@@ -1,0 +1,53 @@
+module.tx_in2fileupload {
+  view {
+    templateRootPaths {
+      0 = EXT:in2fileupload/Resources/Private/Templates/
+    }
+
+    partialRootPaths {
+      0 = EXT:in2fileupload/Resources/Private/Partials/
+    }
+
+    layoutRootPaths {
+      0 = EXT:in2fileupload/Resources/Private/Layouts/
+    }
+  }
+
+  settings {
+
+    jsFiles {
+      0 = EXT:in2fileupload/Resources/Public/JavaScript/Vendor/uppy.min.js
+      10 = EXT:in2fileupload/Resources/Public/JavaScript/Vendor/Locale/de_DE.min.js
+    }
+
+    cssFiles {
+      0 = EXT:cms-backend/Resources/Public/Css/backend.css
+      10 = EXT:in2fileupload/Resources/Public/Css/Vendor/uppy.core.css
+      20 = EXT:in2fileupload/Resources/Public/Css/Vendor/uppy.dashboard.css
+    }
+
+    duplicationBehaviour = rename
+    // https://uppy.io/docs/uppy/#restrictions
+    allowedFileTypes = image/*, .pdf
+
+    fieldConfiguration {
+      sys_file_metadata {
+        title {
+          required = 0
+          title = LLL:EXT:in2fileupload/Resources/Private/Language/Backend/locallang.xlf:title
+        }
+
+        description {
+          required = 0
+          title = LLL:EXT:in2fileupload/Resources/Private/Language/Backend/locallang.xlf:description
+          placeholder = LLL:EXT:in2fileupload/Resources/Private/Language/Backend/locallang.xlf:description.placeholder
+        }
+
+        copyright {
+          required = 1
+          title = LLL:EXT:in2fileupload/Resources/Private/Language/Backend/locallang.xlf:copyright
+        }
+      }
+    }
+  }
+}

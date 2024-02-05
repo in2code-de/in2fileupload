@@ -1,0 +1,101 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers" lang="en"
+			data-namespace-typo3-fluid="true">
+
+<f:layout name="Default"/>
+
+<f:section name="content">
+	<h1>
+		<f:translate key="LLL:EXT:in2fileupload/Resources/Private/Language/Backend/locallang.xlf:fileuploadFolder"/>
+		{folder.readablePath}
+	</h1>
+	<f:flashMessages/>
+
+
+	<f:be.infobox title="Upload Informationen" state="-1">
+		<ul>
+			<li>
+				<f:translate key="LLL:EXT:in2fileupload/Resources/Private/Language/Backend/locallang.xlf:maxFilesize"/>
+				:
+				<strong>bis zu {configuration.maxFileSize -> f:format.bytes()}</strong>
+			</li>
+			<f:if condition="{configuration.allowedFileTypes}">
+				<li>
+					<f:translate key="LLL:EXT:in2fileupload/Resources/Private/Language/Backend/locallang.xlf:allowedFiletypes"/>
+					:
+					<strong>
+						<f:for each="{configuration.allowedFileTypes}" as="fileType" iteration="iterator">
+							<f:if condition="!{iterator.isLast}">
+								<f:then>{fileType},</f:then>
+								<f:else>{fileType}</f:else>
+							</f:if>
+						</f:for>
+					</strong>
+				</li>
+			</f:if>
+		</ul>
+	</f:be.infobox>
+
+	<f:comment>
+		Dropzone
+	</f:comment>
+	<div id="files-drag-drop"></div>
+	<script type="module">
+
+		let uppyConfiguration = {
+			restrictions: {
+				maxFileSize: window.in2fileupload.maxFileSize,
+				requiredMetaFields: window.in2fileupload.requiredMetaFields,
+			},
+		};
+
+		if (window.in2fileupload.backendLanguage === 'de') {
+			uppyConfiguration.locale = Uppy.locales.de_DE;
+		}
+
+		if (window.in2fileupload.allowedFileTypes.length > 0) {
+			uppyConfiguration.restrictions.allowedFileTypes = window.in2fileupload.allowedFileTypes;
+		}
+
+		const uppy = new Uppy.Uppy(uppyConfiguration)
+			.use(Uppy.Dashboard, {
+				inline: true,
+				target: '#files-drag-drop',
+				showProgressDetails: true,
+				proudlyDisplayPoweredByUppy: false,
+				disableThumbnailGenerator: true,
+				width: '100%',
+				height: '800px',
+				singleFileFullScreen: false,
+				metaFields: window.in2fileupload.metaFields,
+			});
+		uppy.setMeta({in2fileupload__folderIdentifier: window.in2fileupload.targetFolder});
+		uppy.use(Uppy.XHRUpload, {
+			endpoint: TYPO3.settings.ajaxUrls.in2fileupload_upload,
+			allowedMetaFields: window.in2fileupload.allowedMetaFields,
+			validateStatus(status, responseText, response) {
+				const result = JSON.parse(responseText);
+				if (status === 200) {
+					if (result.success) {
+						return true;
+					}
+
+					if (result.errors) {
+						require(['TYPO3/CMS/Backend/Notification'], function (Notification) {
+							for (let key in result.errors) {
+								Notification.error(result.errors[key].title, result.errors[key].message);
+							}
+						});
+					}
+				}
+
+				return false;
+			},
+		});
+		uppy.on('dashboard:file-edit-start', (file) => {
+			const dashboard = uppy.getPlugin('Dashboard');
+			console.log(dashboard);
+			console.log(dashboard.el.querySelectorAll('.uppy-Dashboard-FileCard-fieldset'));
+		});
+	</script>
+</f:section>
+</html>
