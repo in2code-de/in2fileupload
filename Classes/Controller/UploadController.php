@@ -5,9 +5,6 @@ namespace In2code\In2fileupload\Controller;
 
 use In2code\In2fileupload\Domain\Factory\MetaFieldConfigurationFactory;
 use In2code\In2fileupload\Domain\Model\MetaFieldConfiguration;
-use In2code\in2fileupload\Event\AfterUploadValidationEvent;
-use In2code\in2fileupload\Event\ModifyFileMetaInformationEvent;
-use In2code\in2fileupload\Event\ModifyModuleConfigurationEvent;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
@@ -72,8 +69,8 @@ class UploadController extends ActionController
                 'backendLanguage' => $GLOBALS['BE_USER']->uc['lang'] ?? 'en'
             ];
 
-            $event = $this->eventDispatcher->dispatch(new ModifyModuleConfigurationEvent($configuration));
-            $configuration = $event->getModuleConfiguration();
+            $configuration =
+                $this->eventDispatcher->dispatch(new ModifyModuleConfigurationEvent($configuration))->getModuleConfiguration();
 
             $this->preparePageRenderer($configuration);
 
@@ -117,8 +114,8 @@ class UploadController extends ActionController
                     }
                 }
 
-                $event = $this->eventDispatcher->dispatch(new ModifyFileMetaInformationEvent($fileMetaInformation, $sysFile));
-                $fileMetaInformation = $event->getFileInformation();
+                $fileMetaInformation = $this->eventDispatcher->dispatch(new ModifyFileMetaInformationEvent($fileMetaInformation,
+                    $sysFile))->getFileInformation();
 
                 if (array_key_exists('sys_file_metadata', $fileMetaInformation)) {
                     $metaData = $sysFile->getMetaData();
@@ -204,7 +201,8 @@ class UploadController extends ActionController
             ];
         }
 
-        $isValid = $this->eventDispatcher->dispatch(new AfterUploadValidationEvent($isValid, $uploadErrors, $request, $this))->isValid();
+        $isValid = $this->eventDispatcher->dispatch(new AfterUploadValidationEvent($isValid, $uploadErrors, $request,
+            $this))->isValid();
 
         return $isValid;
     }

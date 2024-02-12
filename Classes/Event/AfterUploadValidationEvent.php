@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace In2code\in2fileupload\Event;
+namespace In2code\In2fileupload\Event;
 
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ControllerInterface;

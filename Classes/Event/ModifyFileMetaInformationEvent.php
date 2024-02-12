@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace In2code\in2fileupload\Event;
+namespace In2code\In2fileupload\Event;
 
 use TYPO3\CMS\Core\Resource\FileInterface;
 
