@@ -5,6 +5,9 @@ namespace In2code\In2fileupload\Controller;
 
 use In2code\In2fileupload\Domain\Factory\MetaFieldConfigurationFactory;
 use In2code\In2fileupload\Domain\Model\MetaFieldConfiguration;
+use In2code\In2fileupload\Event\AfterUploadValidationEvent;
+use In2code\In2fileupload\Event\ModifyFileMetaInformationEvent;
+use In2code\In2fileupload\Event\ModifyModuleConfigurationEvent;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
@@ -201,7 +204,7 @@ class UploadController extends ActionController
             ];
         }
 
-        $isValid = $this->eventDispatcher->dispatch(new AfterUploadValidationEvent($isValid, $uploadErrors, $request,
+        $isValid = $this->eventDispatcher->dispatch(new AfterUploadValidationEvent($isValid, $this->uploadErrors, $request,
             $this))->isValid();
 
         return $isValid;
