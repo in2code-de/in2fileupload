@@ -40,7 +40,6 @@ module.tx_in2fileupload {
         description {
           required = 0
           title = LLL:EXT:in2fileupload/Resources/Private/Language/Backend/locallang.xlf:description
-          placeholder = LLL:EXT:in2fileupload/Resources/Private/Language/Backend/locallang.xlf:description.placeholder
         }
 
         copyright {

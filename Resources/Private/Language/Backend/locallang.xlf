@@ -9,9 +9,6 @@
 			<trans-unit id="description">
 				<source>Description</source>
 			</trans-unit>
-			<trans-unit id="description.placeholder">
-				<source>my description</source>
-			</trans-unit>
 			<trans-unit id="copyright">
 				<source>Copyright</source>
 			</trans-unit>

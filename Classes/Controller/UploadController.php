@@ -204,10 +204,8 @@ class UploadController extends ActionController
             ];
         }
 
-        $isValid = $this->eventDispatcher->dispatch(new AfterUploadValidationEvent($isValid, $this->uploadErrors, $request,
+        return $this->eventDispatcher->dispatch(new AfterUploadValidationEvent($isValid, $this->uploadErrors, $request,
             $this))->isValid();
-
-        return $isValid;
     }
 
 
@@ -267,10 +265,5 @@ class UploadController extends ActionController
         }
 
         return $metaFields;
-    }
-
-    protected function getUploadErrors(): array
-    {
-
     }
 }
