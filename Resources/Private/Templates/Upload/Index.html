@@ -1,5 +1,5 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers" lang="en"
-			data-namespace-typo3-fluid="true">
+	  data-namespace-typo3-fluid="true">
 
 <f:layout name="Default"/>
 
@@ -57,17 +57,17 @@
 		}
 
 		const uppy = new Uppy.Uppy(uppyConfiguration)
-			.use(Uppy.Dashboard, {
-				inline: true,
-				target: '#files-drag-drop',
-				showProgressDetails: true,
-				proudlyDisplayPoweredByUppy: false,
-				disableThumbnailGenerator: true,
-				width: '100%',
-				height: '800px',
-				singleFileFullScreen: false,
-				metaFields: window.in2fileupload.metaFields,
-			});
+				.use(Uppy.Dashboard, {
+					inline: true,
+					target: '#files-drag-drop',
+					showProgressDetails: true,
+					proudlyDisplayPoweredByUppy: false,
+					disableThumbnailGenerator: true,
+					width: '100%',
+					height: '800px',
+					singleFileFullScreen: false,
+					metaFields: window.in2fileupload.metaFields,
+				});
 		uppy.setMeta({in2fileupload__folderIdentifier: window.in2fileupload.targetFolder});
 		uppy.use(Uppy.XHRUpload, {
 			endpoint: TYPO3.settings.ajaxUrls.in2fileupload_upload,
@@ -91,10 +91,39 @@
 				return false;
 			},
 		});
-		uppy.on('dashboard:file-edit-start', (file) => {
-			const dashboard = uppy.getPlugin('Dashboard');
-			console.log(dashboard);
-			console.log(dashboard.el.querySelectorAll('.uppy-Dashboard-FileCard-fieldset'));
+		uppy.on('info-visible', () => {
+			const {info} = uppy.getState();
+			info.forEach((information) => {
+				if (information.type === 'error') {
+					require(['TYPO3/CMS/Backend/Notification'], function (Notification) {
+						Notification.error(information.message, information.details, 5);
+					});
+				}
+			});
+		});
+
+		// workaround for issue: https://github.com/transloadit/uppy/issues/3769
+		uppy.on('dashboard:file-edit-complete', (file) => {
+			if (file === undefined) {
+				return;
+			}
+
+			if (file.missingRequiredMetaFields !== undefined && file.missingRequiredMetaFields.length > 0) {
+				const validate = (file) => {
+					const requiredMetaFields = window.in2fileupload.requiredMetaFields;
+
+					requiredMetaFields.forEach((requiredField) => {
+						if (file.meta[requiredField] !== '') {
+							const index = file.missingRequiredMetaFields.indexOf(requiredField);
+							if (index !== -1) {
+								file.missingRequiredMetaFields.splice(index, 1);
+							}
+						}
+					});
+				}
+				validate(file);
+				uppy.resetProgress();
+			}
 		});
 	</script>
 </f:section>
