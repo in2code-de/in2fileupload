@@ -49,6 +49,12 @@ fieldConfiguration {
     }
 }
 ```
+**Options:**
+
+* required (0 or 1): defines if the configured meta field is required to be filled before upload
+* title (string or language key): the displayed title of the input field 
+* placeholder (string or language key): the displayed placeholder of the input field
+
 
 ### Duplication behaviour (`settings.duplicationBehaviour`)
 
@@ -105,3 +111,4 @@ Uppy is a sleek, modular open source JavaScript file uploader.
 - localization of different backend language as "de" and "en"
 - code cleanup
 - option to set meta information for all uploaded files
+- prefill of meta fields
