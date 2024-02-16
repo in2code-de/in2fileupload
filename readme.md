@@ -86,9 +86,9 @@ ____
 
 ## Events
 
-ModifyModuleConfigurationEvent
-ModifyFileMetaInformationEvent
-AfterUploadValidationEvent
+* ModifyModuleConfigurationEvent
+* ModifyFileMetaInformationEvent
+* AfterUploadValidationEvent
 
 ## External libraries
 
