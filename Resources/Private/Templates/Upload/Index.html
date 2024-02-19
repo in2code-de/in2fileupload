@@ -70,7 +70,7 @@
 				});
 		uppy.setMeta({in2fileupload__folderIdentifier: window.in2fileupload.targetFolder});
 		uppy.use(Uppy.XHRUpload, {
-			endpoint: TYPO3.settings.ajaxUrls.in2fileupload_upload,
+			endpoint: top.TYPO3.settings.ajaxUrls.in2fileupload_upload,
 			allowedMetaFields: window.in2fileupload.allowedMetaFields,
 			validateStatus(status, responseText, response) {
 				const result = JSON.parse(responseText);
