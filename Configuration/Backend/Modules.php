@@ -4,7 +4,7 @@ declare(strict_types=1);
 return [
     'in2fileupload' => [
         'parent' => 'file',
-        'access' => 'user,group',
+        'access' => 'user',
         'path' => '/module/file/in2fileupload',
         'labels' => 'LLL:EXT:in2fileupload/Resources/Private/Language/Backend/locallang_in2fileupload.xlf',
         'extensionName' => 'in2fileupload',
