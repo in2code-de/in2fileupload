@@ -11,9 +11,9 @@ use In2code\In2fileupload\Event\ModifyModuleConfigurationEvent;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
-use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Resource\Exception\ExistingTargetFileNameException;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
@@ -26,7 +26,6 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 class UploadController extends ActionController
 {
     protected ModuleTemplateFactory $moduleTemplateFactory;
-    protected ModuleTemplate $moduleTemplate;
     protected ResourceFactory $resourceFactory;
     protected PageRenderer $pageRenderer;
     protected Context $context;
@@ -85,8 +84,19 @@ class UploadController extends ActionController
             );
         }
 
-        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
-        return $this->htmlResponse($moduleTemplate->setContent($this->view->render())->renderContent());
+
+        if(GeneralUtility::makeInstance(Typo3Version::class)?->getMajorVersion() < 12) {
+            // for V11
+            $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
+            $content = $moduleTemplate->setContent($this->view->render())->renderContent();
+        } else {
+            // v12 and above
+            $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
+            $moduleTemplate->setContent($this->view->render());
+            $content = $moduleTemplate->renderContent();
+        }
+
+        return $this->htmlResponse($content);
     }
 
     public function uploadAction(ServerRequestInterface $request): ResponseInterface

@@ -4,8 +4,8 @@ Is a TYPO3 extension that makes it possible to force the user to set metadata su
 
 ## Requirements
 
-* TYPO3 11.x
-* PHP 8.0
+* TYPO3 ^11.5 or TYPO3 ^12.4
+* PHP ^8.0
 
 ## TypoScript configuration
 
@@ -86,9 +86,9 @@ ____
 
 ## Events
 
-ModifyModuleConfigurationEvent
-ModifyFileMetaInformationEvent
-AfterUploadValidationEvent
+* ModifyModuleConfigurationEvent
+* ModifyFileMetaInformationEvent
+* AfterUploadValidationEvent
 
 ## External libraries
 
