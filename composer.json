@@ -16,20 +16,20 @@
   "license": "GPL-2.0+",
   "require": {
     "php": "^8.2",
-    "typo3/cms-core": "^13.4"
+    "typo3/cms-core": "^14.3"
   },
   "require-dev": {
-    "helhum/typo3-console": "^8.2",
+    "helhum/typo3-console": "^8.3",
     "roave/security-advisories": "dev-latest",
-    "typo3/cms-backend": "^13.4",
-    "typo3/cms-extbase": "^13.4",
-    "typo3/cms-extensionmanager": "^13.4",
-    "typo3/cms-filelist": "^13.4",
-    "typo3/cms-filemetadata": "^13.4",
-    "typo3/cms-fluid": "^13.4",
-    "typo3/cms-frontend": "^13.4",
-    "typo3/cms-install": "^13.4",
-    "typo3/cms-tstemplate": "^13.4"
+    "typo3/cms-backend": "^14.3",
+    "typo3/cms-extbase": "^14.3",
+    "typo3/cms-extensionmanager": "^14.3",
+    "typo3/cms-filelist": "^14.3",
+    "typo3/cms-filemetadata": "^14.3",
+    "typo3/cms-fluid": "^14.3",
+    "typo3/cms-frontend": "^14.3",
+    "typo3/cms-install": "^14.3",
+    "typo3/cms-tstemplate": "^14.3"
   },
   "autoload": {
     "psr-4": {

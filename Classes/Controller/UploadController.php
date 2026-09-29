@@ -70,7 +70,7 @@ class UploadController extends ActionController
                 'allowedMetaFields' => array_merge(array_keys($metaFields),
                     ['in2fileupload__folderIdentifier', 'in2fileupload__duplicationBehaviour']),
                 'requiredMetaFields' => $requiredMetaFields,
-                'backendLanguage' => $GLOBALS['BE_USER']->uc['lang'] ?? 'en'
+                'backendLanguage' => $GLOBALS['BE_USER']->user['lang'] ?? 'en'
             ];
 
             $configuration =

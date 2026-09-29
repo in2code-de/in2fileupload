@@ -4,14 +4,14 @@ Is a TYPO3 extension that makes it possible to force the user to set metadata su
 
 ## Requirements
 
-* TYPO3 ^13.4
+* TYPO3 ^14.3
 * PHP ^8.2
 
-For TYPO3 11 and 12 use the branches `typo3-v11` and `typo3-v12`.
+For TYPO3 11, 12 and 13 use the branches `typo3-v11`, `typo3-v12` and `typo3-v13`.
 
 ## Contribution with ddev
 
-This repository provides a [DDEV](https://ddev.readthedocs.io/)-backed development environment (TYPO3 13.4, PHP 8.2).
+This repository provides a [DDEV](https://ddev.readthedocs.io/)-backed development environment (TYPO3 14.3, PHP 8.2).
 If DDEV is installed, simply run the following commands to quickly set up a local environment:
 
 * `ddev start`
