@@ -17,10 +17,18 @@
   "require": {
     "php": "^8.0",
     "typo3/cms-core": "^11.5 || ^12.4"
-  }
-,
+  },
   "require-dev": {
-    "roave/security-advisories": "dev-latest"
+    "helhum/typo3-console": "^8.0",
+    "typo3/cms-backend": "^12.4",
+    "typo3/cms-extbase": "^12.4",
+    "typo3/cms-extensionmanager": "^12.4",
+    "typo3/cms-filelist": "^12.4",
+    "typo3/cms-filemetadata": "^12.4",
+    "typo3/cms-fluid": "^12.4",
+    "typo3/cms-frontend": "^12.4",
+    "typo3/cms-install": "^12.4",
+    "typo3/cms-tstemplate": "^12.4"
   },
   "autoload": {
     "psr-4": {
@@ -29,7 +37,21 @@
   },
   "extra": {
     "typo3/cms": {
+      "cms-package-dir": "{$vendor-dir}/typo3/cms",
+      "web-dir": ".build/public",
       "extension-key": "in2fileupload"
+    }
+  },
+  "config": {
+    "vendor-dir": ".build/vendor",
+    "bin-dir": ".build/bin",
+    "sort-packages": true,
+    "allow-plugins": {
+      "typo3/cms-composer-installers": true,
+      "typo3/class-alias-loader": true
+    },
+    "audit": {
+      "block-insecure": false
     }
   }
 }

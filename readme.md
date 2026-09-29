@@ -7,6 +7,25 @@ Is a TYPO3 extension that makes it possible to force the user to set metadata su
 * TYPO3 ^11.5 or TYPO3 ^12.4
 * PHP ^8.0
 
+## Contribution with ddev
+
+This repository provides a [DDEV](https://ddev.readthedocs.io/)-backed development environment (TYPO3 12.4, PHP 8.2).
+If DDEV is installed, simply run the following commands to quickly set up a local environment:
+
+* `ddev start`
+* `ddev initialize`
+
+### Requirements
+
+1. Install ddev, see: https://ddev.readthedocs.io/en/stable/#installation
+
+### Installation
+
+1. Clone this repository
+2. Run `ddev start`
+3. Run `ddev initialize` to setup configurations and test database
+4. Open the backend at https://in2fileupload.ddev.site/typo3 and log in with `admin` / `password`
+
 ## TypoScript configuration
 
 ### Allowed file types (`settings.allowedFileTypes`)
