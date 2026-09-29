@@ -94,9 +94,7 @@ return [
         'encryptionKey' => '513bc94d063bed07ec2141ce0aa985c703b544940289758f9168cfc7e5b66436f3706f53ca8d01ada9479f3dd6fd4512',
         'exceptionalErrors' => 12290,
         'features' => [
-            'security.backend.enforceContentSecurityPolicy' => true,
             'security.system.enforceAllowedFileExtensions' => true,
-            'security.usePasswordPolicyForFrontendUsers' => true,
         ],
         'sitename' => 'in2fileupload DEV',
         'systemMaintainers' => [

@@ -15,20 +15,21 @@
   ],
   "license": "GPL-2.0+",
   "require": {
-    "php": "^8.0",
-    "typo3/cms-core": "^11.5 || ^12.4"
+    "php": "^8.2",
+    "typo3/cms-core": "^13.4"
   },
   "require-dev": {
-    "helhum/typo3-console": "^8.0",
-    "typo3/cms-backend": "^12.4",
-    "typo3/cms-extbase": "^12.4",
-    "typo3/cms-extensionmanager": "^12.4",
-    "typo3/cms-filelist": "^12.4",
-    "typo3/cms-filemetadata": "^12.4",
-    "typo3/cms-fluid": "^12.4",
-    "typo3/cms-frontend": "^12.4",
-    "typo3/cms-install": "^12.4",
-    "typo3/cms-tstemplate": "^12.4"
+    "helhum/typo3-console": "^8.2",
+    "roave/security-advisories": "dev-latest",
+    "typo3/cms-backend": "^13.4",
+    "typo3/cms-extbase": "^13.4",
+    "typo3/cms-extensionmanager": "^13.4",
+    "typo3/cms-filelist": "^13.4",
+    "typo3/cms-filemetadata": "^13.4",
+    "typo3/cms-fluid": "^13.4",
+    "typo3/cms-frontend": "^13.4",
+    "typo3/cms-install": "^13.4",
+    "typo3/cms-tstemplate": "^13.4"
   },
   "autoload": {
     "psr-4": {
@@ -49,9 +50,6 @@
     "allow-plugins": {
       "typo3/cms-composer-installers": true,
       "typo3/class-alias-loader": true
-    },
-    "audit": {
-      "block-insecure": false
     }
   }
 }

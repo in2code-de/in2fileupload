@@ -13,8 +13,8 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Core\Context\Context;
-use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Page\PageRenderer;
+use TYPO3\CMS\Core\Resource\Enum\DuplicationBehavior;
 use TYPO3\CMS\Core\Resource\Exception\ExistingTargetFileNameException;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
@@ -49,6 +49,8 @@ class UploadController extends ActionController
 
     public function indexAction(): ResponseInterface
     {
+        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
+
         if (array_key_exists('id', $this->request->getQueryParams())) {
             $folderIdentifier = $this->request->getQueryParams()['id'];
             $requiredMetaFields = [];
@@ -76,7 +78,7 @@ class UploadController extends ActionController
 
             $this->preparePageRenderer();
 
-            $this->view->assignMultiple(
+            $moduleTemplate->assignMultiple(
                 [
                     'folder' => $this->resourceFactory->getFolderObjectFromCombinedIdentifier($folderIdentifier),
                     'configuration' => $configuration
@@ -84,24 +86,14 @@ class UploadController extends ActionController
             );
         }
 
-
-        if(GeneralUtility::makeInstance(Typo3Version::class)?->getMajorVersion() < 12) {
-            // for V11
-            $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
-            $content = $moduleTemplate->setContent($this->view->render())->renderContent();
-        } else {
-            // v12 and above
-            $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
-            $moduleTemplate->setContent($this->view->render());
-            $content = $moduleTemplate->renderContent();
-        }
-
-        return $this->htmlResponse($content);
+        return $moduleTemplate->renderResponse('Upload/Index');
     }
 
     public function uploadAction(ServerRequestInterface $request): ResponseInterface
     {
         if (empty($this->settings)) {
+            // called as AJAX route, so extbase did not initialize the configuration manager with the request
+            $this->configurationManager->setRequest($request);
             $this->settings = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
                 'in2fileupload');
         }
@@ -116,7 +108,7 @@ class UploadController extends ActionController
             $targetFolder = $this->resourceFactory->getFolderObjectFromCombinedIdentifier($_POST['in2fileupload__folderIdentifier']);
 
             try {
-                $sysFile = $targetFolder->addUploadedFile($file, $this->settings['duplicationBehaviour']);
+                $sysFile = $targetFolder->addUploadedFile($file, $this->getDuplicationBehaviour());
 
                 $fileMetaInformation = [];
 
@@ -232,6 +224,12 @@ class UploadController extends ActionController
         foreach ($this->settings['jsModules'] as $jsModule) {
             $this->pageRenderer->addJsFile($jsModule, 'module');
         }
+    }
+
+    private function getDuplicationBehaviour(): DuplicationBehavior
+    {
+        return DuplicationBehavior::tryFrom((string)($this->settings['duplicationBehaviour'] ?? ''))
+            ?? DuplicationBehavior::RENAME;
     }
 
     private function buildConfiguration(array $properties): MetaFieldConfiguration

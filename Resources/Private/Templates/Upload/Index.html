@@ -1,43 +1,50 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers" lang="en"
 	  data-namespace-typo3-fluid="true">
 
-<f:layout name="Default"/>
+<f:layout name="Module"/>
 
-<f:section name="content">
-	<h1>
-		<f:translate key="LLL:EXT:in2fileupload/Resources/Private/Language/Backend/locallang.xlf:fileuploadFolder"/>
-		{folder.readablePath}
-	</h1>
-	<f:flashMessages/>
+<f:section name="Content">
+	<f:if condition="{folder}">
+		<f:then>
+			<h1>
+				<f:translate key="LLL:EXT:in2fileupload/Resources/Private/Language/Backend/locallang.xlf:fileuploadFolder"/>
+				{folder.readablePath}
+			</h1>
 
+			<f:be.infobox title="Upload Informationen" state="-1">
+				<ul>
+					<li>
+						<f:translate key="LLL:EXT:in2fileupload/Resources/Private/Language/Backend/locallang.xlf:maxFilesize"/>
+						:
+						<strong>bis zu {configuration.maxFileSize -> f:format.bytes()}</strong>
+					</li>
+					<f:if condition="{configuration.allowedFileTypes}">
+						<li>
+							<f:translate key="LLL:EXT:in2fileupload/Resources/Private/Language/Backend/locallang.xlf:allowedFiletypes"/>
+							:
+							<strong>
+								<f:for each="{configuration.allowedFileTypes}" as="fileType" iteration="iterator">
+									<f:if condition="!{iterator.isLast}">
+										<f:then>{fileType},</f:then>
+										<f:else>{fileType}</f:else>
+									</f:if>
+								</f:for>
+							</strong>
+						</li>
+					</f:if>
+				</ul>
+			</f:be.infobox>
 
-	<f:be.infobox title="Upload Informationen" state="-1">
-		<ul>
-			<li>
-				<f:translate key="LLL:EXT:in2fileupload/Resources/Private/Language/Backend/locallang.xlf:maxFilesize"/>
-				:
-				<strong>bis zu {configuration.maxFileSize -> f:format.bytes()}</strong>
-			</li>
-			<f:if condition="{configuration.allowedFileTypes}">
-				<li>
-					<f:translate key="LLL:EXT:in2fileupload/Resources/Private/Language/Backend/locallang.xlf:allowedFiletypes"/>
-					:
-					<strong>
-						<f:for each="{configuration.allowedFileTypes}" as="fileType" iteration="iterator">
-							<f:if condition="!{iterator.isLast}">
-								<f:then>{fileType},</f:then>
-								<f:else>{fileType}</f:else>
-							</f:if>
-						</f:for>
-					</strong>
-				</li>
-			</f:if>
-		</ul>
-	</f:be.infobox>
-
-	<f:comment>
-		Dropzone
-	</f:comment>
-	<div id="files-drag-drop" data-configuration="{configuration -> f:format.json()}"></div>
+			<f:comment>
+				Dropzone
+			</f:comment>
+			<div id="files-drag-drop" data-configuration="{configuration -> f:format.json()}"></div>
+		</f:then>
+		<f:else>
+			<h1>
+				<f:translate key="LLL:EXT:in2fileupload/Resources/Private/Language/Backend/locallang.xlf:selectFolder"/>
+			</h1>
+		</f:else>
+	</f:if>
 </f:section>
 </html>
