@@ -74,7 +74,7 @@ class UploadController extends ActionController
             $configuration =
                 $this->eventDispatcher->dispatch(new ModifyModuleConfigurationEvent($configuration))->getModuleConfiguration();
 
-            $this->preparePageRenderer($configuration);
+            $this->preparePageRenderer();
 
             $this->view->assignMultiple(
                 [
@@ -219,20 +219,19 @@ class UploadController extends ActionController
     }
 
 
-    private function preparePageRenderer(array $configuration): void
+    private function preparePageRenderer(): void
     {
         foreach ($this->settings['cssFiles'] as $cssFile) {
             $this->pageRenderer->addCssFile($cssFile);
         }
 
-        foreach ($this->settings['jsFiles'] as $jsFile) {
-            $this->pageRenderer->addJsFile($jsFile);
+        foreach ($this->settings['vendorJs'] as $vendorJs) {
+            $this->pageRenderer->addJsFile($vendorJs);
         }
 
-        $this->pageRenderer->addJsInlineCode(
-            'in2fileupload configuration',
-            'var in2fileupload = ' . json_encode($configuration, JSON_THROW_ON_ERROR)
-        );
+        foreach ($this->settings['jsModules'] as $jsModule) {
+            $this->pageRenderer->addJsFile($jsModule, 'module');
+        }
     }
 
     private function buildConfiguration(array $properties): MetaFieldConfiguration

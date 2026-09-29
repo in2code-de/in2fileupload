@@ -15,9 +15,13 @@ module.tx_in2fileupload {
 
   settings {
 
-    jsFiles {
+    vendorJs {
       0 = EXT:in2fileupload/Resources/Public/JavaScript/Vendor/uppy.min.js
       10 = EXT:in2fileupload/Resources/Public/JavaScript/Vendor/Locale/de_DE.min.js
+    }
+
+    jsModules {
+      0 = EXT:in2fileupload/Resources/Public/JavaScript/Upload.js
     }
 
     cssFiles {
