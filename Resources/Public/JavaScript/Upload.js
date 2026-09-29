@@ -10,6 +10,18 @@ if (target !== null) {
 		top.TYPO3.Notification.error(title, message, duration);
 	};
 
+	// TYPO3 sets data-color-scheme="light|dark" on <html>, "auto" (no attribute) follows the OS setting.
+	// "auto" is resolved here, as Uppy only listens to OS changes if its theme was "auto" on initialization
+	const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+	const getTheme = () => {
+		const colorScheme = document.documentElement.dataset.colorScheme;
+		if (colorScheme === 'light' || colorScheme === 'dark') {
+			return colorScheme;
+		}
+
+		return darkModeMediaQuery.matches ? 'dark' : 'light';
+	};
+
 	let uppyConfiguration = {
 		restrictions: {
 			maxFileSize: configuration.maxFileSize,
@@ -36,7 +48,16 @@ if (target !== null) {
 			height: '800px',
 			singleFileFullScreen: false,
 			metaFields: configuration.metaFields,
+			theme: getTheme(),
 		});
+
+	// follow color scheme changes from the TYPO3 user menu and the OS without reload
+	const updateTheme = () => {
+		uppy.getPlugin('Dashboard').setOptions({theme: getTheme()});
+	};
+	new MutationObserver(updateTheme)
+		.observe(document.documentElement, {attributes: true, attributeFilter: ['data-color-scheme']});
+	darkModeMediaQuery.addEventListener('change', updateTheme);
 	uppy.setMeta({in2fileupload__folderIdentifier: configuration.targetFolder});
 	uppy.use(Uppy.XHRUpload, {
 		endpoint: top.TYPO3.settings.ajaxUrls.in2fileupload_upload,
